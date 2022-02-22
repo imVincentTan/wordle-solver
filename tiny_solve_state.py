@@ -4,10 +4,8 @@ from wordlist import wordlist_small
 
 class TinySolveState(SolveState):
     def __init__(self) -> None:
-        self.possible_letters = self.get_english_alphabet()
-        self.number_of_characters = 5
-        self.valid_input_words = self.get_tiny_wordlist()
-        self.possible_final_answers = self.valid_input_words
+        self.possible_letters = {'a', 'b', 'c'}
+        self.number_of_characters = 2
+        self.valid_input_words = ['aa', 'ab', 'ac', 'ba', 'bb', 'bc', 'ca', 'cb', 'cc']
+        self.possible_final_answers = ['aa', 'ab', 'ac', 'ba', 'bb', 'bc', 'ca', 'cb', 'cc']
 
-    def get_tiny_wordlist(self):
-        return self.get_smaller_wordlist(wordlist_small, 1)
