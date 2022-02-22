@@ -1,3 +1,4 @@
+from math import log2
 from hints_calculator import HintsCalculator
 from tools import Tools
 
@@ -12,6 +13,21 @@ class SolveState(Tools):
     def get_submission_hints(self, input_word, target_word):
         hints_calculator = HintsCalculator(input_word, target_word)
         return hints_calculator.get_hints()
+
+    def get_expected_score(self, input_word):
+        hint_pattern_to_frequency_map = self.get_hint_pattern_to_frequency_map(input_word)
+        score = 0
+        for key in hint_pattern_to_frequency_map:
+            score += self.get_score_gained_by_occurrences(hint_pattern_to_frequency_map[key])
+        return score
+
+    def get_score_gained_by_occurrences(self, occurrences):
+        probability_of_hint = occurrences / self.get_number_of_valid_inputs()
+        weight = log2(1/probability_of_hint)
+        return probability_of_hint * weight
+
+    def get_number_of_valid_inputs(self):
+        return len(self.valid_input_words)
 
     def get_hint_pattern_to_frequency_map(self, input_word):
         hint_pattern_to_frequency_map = {}
