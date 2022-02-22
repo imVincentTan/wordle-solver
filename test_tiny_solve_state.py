@@ -19,5 +19,9 @@ class TestTinySolveStateMethods(unittest.TestCase):
         score = solve_state.get_expected_score('ab')
         self.assertAlmostEqual(score, 2)
 
+    def test_get_sorted_word_to_expected_score(self):
+        solve_state = TinySolveState()
+        self.assertAlmostEqual(solve_state.get_sorted_word_to_expected_score(), [['aa', 2], ['ab', 2], ['ba', 2], ['bb', 2]])
+
 if __name__ == '__main__':
     unittest.main()

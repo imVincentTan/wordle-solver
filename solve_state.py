@@ -14,6 +14,14 @@ class SolveState(Tools):
         hints_calculator = HintsCalculator(input_word, target_word)
         return hints_calculator.get_hints()
 
+    def get_sorted_word_to_expected_score(self):
+        # TODO: improve algorithm to be faster
+        word_score_pairs = []
+        for input_word in self.valid_input_words:
+            word_score_pairs.append([input_word, self.get_expected_score(input_word)])
+        word_score_pairs.sort(key=lambda x: x[1], reverse=True)
+        return word_score_pairs
+
     def get_expected_score(self, input_word):
         hint_pattern_to_frequency_map = self.get_hint_pattern_to_frequency_map(input_word)
         score = 0
